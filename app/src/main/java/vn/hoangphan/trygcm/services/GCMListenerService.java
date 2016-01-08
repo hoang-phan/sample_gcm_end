@@ -15,10 +15,9 @@ public class GCMListenerService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
         super.onMessageReceived(from, data);
-        if (Constants.FACE_RECOGNIZED.equals(data.getString(Constants.COLLAPSE_KEY))) {
-            Intent intent = new Intent("android.intent.action.NOTIFICATION");
-            sendBroadcast(intent);
-        }
+        Intent intent = new Intent("android.intent.action.FACEREC_NOTIFICATION");
+        intent.putExtra(Constants.COLLAPSE_KEY, data.getString(Constants.COLLAPSE_KEY));
+        sendBroadcast(intent);
         Log.d("Message Received From", from);
         Log.d("data", data.toString());
     }
